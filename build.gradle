@@ -1,0 +1,65 @@
+ext['lombok.version'] = "1.18.6"
+
+allprojects {
+//    repositories {
+        //jcenter() 
+//        mavenCentral()
+//    }
+    buildscript {
+        repositories {
+            jcenter() 
+            mavenCentral()
+        }
+        dependencies {
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.4.RELEASE")
+        }
+    }
+}
+
+subprojects {
+    buildscript {
+        repositories {
+            jcenter() 
+            mavenCentral()
+        }
+        dependencies {
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.4.RELEASE")
+        }
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
+
+    repositories {
+        jcenter() 
+        mavenCentral()
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    dependencies {
+        compile("org.springframework.boot:spring-boot-devtools")
+        compile("org.springframework.boot:spring-boot-starter-web")
+        annotationProcessor "org.projectlombok:lombok"
+        compileOnly "org.projectlombok:lombok"
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        implementation "org.apache.commons:commons-lang3"
+    }
+}
+project(':test-env') {
+    dependencies {
+    }
+}
+project(':test-domain') {
+    dependencies {
+    }
+}
+project(':test-web') {
+}
+wrapper {
+  gradleVersion = "5.4.1"
+}
