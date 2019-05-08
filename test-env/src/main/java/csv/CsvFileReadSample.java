@@ -27,9 +27,7 @@ public class CsvFileReadSample {
 	 */
 	public List<TestCsvParam> getTestCsv() {
 		try {
-			return createTestCsv(Files.readAllLines(
-					Paths.get(PATH + TEST_CSV_FILE_NAME),
-					Charset.forName(CHARSET)));
+			return createTestCsv(Files.readAllLines(Paths.get(PATH + TEST_CSV_FILE_NAME), Charset.forName(CHARSET)));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -43,10 +41,8 @@ public class CsvFileReadSample {
 	 * @return CSVのList
 	 */
 	private List<TestCsvParam> createTestCsv(List<String> csv) {
-		return csv.stream()
-				.filter(c -> StringUtils.isNoneEmpty(c))
-				.map(c -> createParam(c))
-				.collect(Collectors.toList());
+		return csv.stream().filter(c -> StringUtils.isNoneEmpty(c)).map(c -> createParam(c))
+		        .collect(Collectors.toList());
 	}
 
 	/**

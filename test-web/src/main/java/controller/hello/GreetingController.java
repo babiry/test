@@ -16,13 +16,14 @@ public class GreetingController {
 
 	@Autowired
 	private TestService testService;
-	
-    @RequestMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        
-        List<TestCsvParam> list = testService.sample();
-        model.addAttribute("paramlist", list);
-        return "greeting";
-    }
+
+	@RequestMapping("/greeting")
+	public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
+	        Model model) {
+		model.addAttribute("name", name);
+
+		List<TestCsvParam> list = testService.sample();
+		model.addAttribute("paramlist", list);
+		return "greeting";
+	}
 }
