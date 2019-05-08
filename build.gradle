@@ -5,6 +5,9 @@ allprojects {
         //jcenter() 
 //        mavenCentral()
 //    }
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
     buildscript {
         repositories {
             jcenter() 
@@ -26,12 +29,6 @@ subprojects {
             classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.4.RELEASE")
         }
     }
-
-    apply plugin: 'java'
-    apply plugin: 'eclipse'
-    apply plugin: 'idea'
-    apply plugin: "org.springframework.boot"
-    apply plugin: "io.spring.dependency-management"
 
     repositories {
         jcenter() 
