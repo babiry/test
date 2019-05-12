@@ -11,11 +11,11 @@ import dto.TestCsvParam;
 @Service
 public class TestServiceImpl implements TestService {
 
-	@Autowired
-	private CsvFileReadSample csvFileReadSample;
+    @Autowired
+    private CsvFileReadSample csvFileReadSample;
 
-	@Override
-	public List<TestCsvParam> sample() {
-		return csvFileReadSample.getTestCsv();
-	}
+    @Override
+    public List<TestCsvParam> sample() {
+        return csvFileReadSample.getTestCsv();
+    }
 }
