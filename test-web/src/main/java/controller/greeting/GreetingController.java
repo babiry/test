@@ -1,7 +1,9 @@
-package controller.hello;
+package controller.greeting;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +19,13 @@ public class GreetingController {
     @Autowired
     private TestService testService;
 
-    @RequestMapping("/greeting")
-    public String greeting(
-            @RequestParam(name = "name", required = false,
-            defaultValue = "World") String name,
-            Model model) {
-        model.addAttribute("name", name);
+    private Logger LOGGER = LogManager.getLogger("test");
 
+    @RequestMapping("/greeting")
+    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
+            Model model) {
+        LOGGER.trace("test start");
+        model.addAttribute("name", name);
         List<TestCsvParam> list = testService.sample();
         model.addAttribute("paramlist", list);
         return "greeting";
