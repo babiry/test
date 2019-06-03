@@ -4,3 +4,5 @@
 　　　　　　　Spring Tool Suite 4   
 　　　　　　　Lombok v1.18.6   
 　　　　　　　java version "1.8.0_211"  
+2019/06/03　log4jのログ出力がうまく行かない･･･  
+            一旦おいておく
