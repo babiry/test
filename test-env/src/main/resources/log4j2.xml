@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration>
+<Configuration status="ALL">
+	<Properties>
+		<Property name="ptn">%d{yyyy-MM-dd HH:mm:ss.SSS} p=%-5p c=%c t=%t
+			C=%C F=%F M=%M L=%L m=%m %n</Property>
+		<Property name="ptn">%d %p %m%n</Property>
+	</Properties>
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${ptn}" />
+		</Console>
+		<File name="File" fileName="/ver/log/log4j2.log">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | [%t] | %-5level | %c{36} | %msg%n" />
+		</File>
+		<RollingFile name="file" fileName="/ver/log/log4j2.log"
+			filePattern="log/%d{yyyyMM}/log4j2_%d{yyyyMMdd}_%i.log">
+			<PatternLayout pattern="${ptn}" />
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="2 MB" />
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Root level="debug">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="file" />
+		</Root>
+	</Loggers>
+</Configuration>

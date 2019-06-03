@@ -15,7 +15,6 @@ import dto.TestCsvParam;
 
 @Component
 public class CsvFileReadSample {
-
     private static final String PATH = "../test-env/src/main/resources/csv/";
     private static final String TEST_CSV_FILE_NAME = "test.csv";
     private static final String CHARSET = "UTF-8";

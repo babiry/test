@@ -19,12 +19,13 @@ public class GreetingController {
     @Autowired
     private TestService testService;
 
-    private Logger LOGGER = LogManager.getLogger("test");
-
+    private Logger LOGGER = LogManager.getLogger();
+  
     @RequestMapping("/greeting")
-    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
-            Model model) {
-        LOGGER.trace("test start");
+    public String greeting(
+            @RequestParam(name = "name", required = false, defaultValue = "World")
+            String name, Model model) {
+        LOGGER.info("test start");
         model.addAttribute("name", name);
         List<TestCsvParam> list = testService.sample();
         model.addAttribute("paramlist", list);
