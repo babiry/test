@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import dto.InputCsvParam;
 import dto.TestCsvParam;
 
 /**
@@ -14,5 +15,20 @@ public interface TestService {
      * 
      * @return CSV空取得したデータ
      */
-    public List<TestCsvParam> sample();
+    public List<TestCsvParam> readCsvSample();
+
+    /**
+     * CSVからの取得サンプルサービス
+     * 
+     * @return CSV空取得したデータ
+     */
+    public List<InputCsvParam> readCsvTest();
+
+    /**
+     * CSVからの書き込みサービス
+     * 
+     * @param 書き込みデータ
+     * @return CSV空取得したデータ
+     */
+    public boolean writeCsvSample(InputCsvParam input);
 }

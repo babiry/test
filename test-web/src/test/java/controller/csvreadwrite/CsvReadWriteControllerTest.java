@@ -1,10 +1,10 @@
-package controller.greeting;
+package controller.csvreadwrite;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class GreetingControllerTest {
+public class CsvReadWriteControllerTest {
 
     @Test
     public void test() {
