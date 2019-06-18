@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link th:href="@{/css/test.css}" rel="stylesheet"></link>
+
+</head>
+<body>
+	<p th:text="'Hello, ' + ${name} + '!'" />
+	<div id="testTime"></div>
+	<ul th:each="para : ${paramlist}">
+		<li th:text="${para.value}"></li>
+		<li th:unless="${para.num == 1}" th:text="${para.param}"></li>
+	</ul>
+
+	<div th:if="${inputText}">
+		<div>書き込んだ値</div>
+		<div th:text="${inputText}"></div>
+	</div>
+	<div>書き込んだ値</div>
+	<ul th:each="para : ${testlist}">
+		<li th:text="${para.dateTime}"></li>
+		<li th:text="${para.textValue}"></li>
+		<li th:text="${para.count}"></li>
+	</ul>
+	<form role="form" th:action="@{/typing}" th:object="${inputFormTest}"
+		method="post">
+		<input type="text" name="textValue" size="30" />
+		<button type="submit" class="btn btn-default">CSV書き出し</button>
+		<input type="button" id="btnsend" name="submit" value="送信"
+			onclick="asyncSend()">
+	</form>
+	<div id="result"></div>
+
+	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/test.js}"></script>
+
+</body>
+</html>
