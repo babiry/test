@@ -27,21 +27,31 @@ public class WebViewController {
     private TestService testService;
 
     private Logger LOGGER = LogManager.getLogger();
-  
-    @RequestMapping(value = "/typing", method = {GET ,POST})
-    public String greeting(@ModelAttribute InputForm inputForm,
-            @RequestParam(name = "name", required = false, defaultValue = "World")
-            String name, BindingResult result, 
-            Model model) {
+
+    @RequestMapping(value = "/typing", method = { GET, POST })
+    public String typing(@ModelAttribute InputForm inputForm,
+            @RequestParam(name = "name", required = false, defaultValue = "World") String name,
+            BindingResult result, Model model) {
         LOGGER.info("typing view start");
 
         model.addAttribute("name", name);
         List<TestCsvParam> list = testService.readCsvSample();
         model.addAttribute("paramlist", list);
 
-        List<InputCsvParam> list2  = testService.readCsvTest();
+        List<InputCsvParam> list2 = testService.readCsvTest();
         model.addAttribute("testlist", list2);
-        
+
         return "typing";
     }
+
+    @RequestMapping(value = "/history", method = { GET, POST })
+    public String history(@ModelAttribute InputForm inputForm,
+            @RequestParam(name = "name", required = false, defaultValue = "World") String name,
+            BindingResult result, Model model) {
+        List<InputCsvParam> list2 = testService.readCsvTest();
+        model.addAttribute("testlist", list2);
+
+        return "history";
+    }
+
 }

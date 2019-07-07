@@ -15,34 +15,16 @@
 			<div class="col text-left" id="testTime"></div>
 			<div class="col text-right" th:text="'Hello, ' + ${name} + '!'"></div>
 		</div>
-		<p>サンプルの問題</p>
-		<div class="row">
-			<h2 id="title" class="col-md-7 offset-md-3 text-center"></h2>
-			<div id="counter" class="col-md-2 d-flex align-items-end"></div>
-		</div>
-		<p id="problem" class="offset-md-1 text-center"></p>
-		<div id="ngMessage" class="text-danger text-center"></div>
-		<div id="function1" class="text-danger text-center"></div>
-		<form class="form-inline justify-content-center">
-			<input type="text" name="textValue" id="textValue" size="80" />
-		</form>
-		<form role="form" th:action="@{/typing}" th:object="${inputFormTest}"
-			method="post">
-			<div class="col text-center">
-				<button type="button" class="btn btn-default">画面更新</button>
-				<input type="button" class="btn btn-info" id="btnsend" name="submit"
-					value="CSV書き込み" onclick="asyncSend()">
-			</div>
-		</form>
-		<div id="result"></div>
-		<a href="/history">履歴を見る </a>
+
+		<p th:inline="text">[[${name}]]の履歴!</p>
+		<a href="/typing">タイピングに戻る </a>
+		<ul th:each="para : ${testlist}">
+			<li th:text="${para.dateTime}"></li>
+			<li th:text="${para.textValue}"></li>
+			<li th:text="${para.count}"></li>
+		</ul>
 	</div>
 
-	<script th:inline="javascript">
-      /*<![CDATA[*/
-         var paramlist = /*[[${paramlist}]]*/ ;
-       /*]]>*/
-	</script>
 	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/test.js}"></script>
 	<script
