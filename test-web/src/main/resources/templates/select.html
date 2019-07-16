@@ -16,37 +16,38 @@
 			<div class="col text-right" th:text="'Hello, ' + ${name} + '!'"></div>
 		</div>
 		<p>サンプルの問題</p>
-		<div class="row">
-			<h2 id="title" class="col-md-7 offset-md-3 text-center"></h2>
-			<div id="counter" class="col-md-2 d-flex align-items-end"></div>
-		</div>
-		<p id="problem" class="offset-md-1 text-center"></p>
-		<div id="ngMessage" class="text-danger text-center"></div>
-		<div id="function1" class="text-danger text-center"></div>
-		<form class="form-inline justify-content-center">
-			<input type="text" name="textValue" id="textValue" size="80" />
-		</form>
-		<form role="form" th:action="@{/typing}" th:object="${inputFormTest}"
-			method="post">
-			<div class="col text-center">
-				<button type="button" class="btn btn-default">画面更新</button>
-				<input type="button" class="btn btn-info" id="btnsend" name="submit"
-					value="CSV書き込み" onclick="asyncSend()">
+		<form action="/typing" th:action="@{/typing}"
+			th:object="${selectForm}" method="post">
+			<div>
+				<label class="control-label">問題形式 </label>
+				<div class="custom-control custom-radio"
+					th:each="item : ${radioItems}">
+					<input type="radio" th:value="${item.value}"
+						th:field="*{questionType}" /> <label
+						th:for="${#ids.prev('questionType')}" th:text="${item.label}"></label>
+				</div>
 			</div>
+			<div>
+				<label class="control-label">問題数</label> <select
+					th:field="*{questionNumber}">
+					<option th:each="num : ${#numbers.sequence(1, numbers)}"
+						th:value="${num}" th:text="${num}"></option>
+				</select>
+			</div>
+			<div>
+				<label class="control-label">問題範囲</label>
+				<ul>
+					<li th:each="level : ${allLevels}"><input type="checkbox"
+						th:field="*{levels}" th:value="${level.value}" /> <label
+						th:for="${#ids.prev('levels')}" th:text="${level.label}"></label></li>
+				</ul>
+			</div>
+			<input type="submit" value="問題開始" class="btn btn-default" />
 		</form>
-		<div id="result"></div>
-		<a href="/history">履歴を見る </a>
-		<a href="/select">選択画面に戻る </a>
 	</div>
 
-	<script th:inline="javascript">
-      /*<![CDATA[*/
-         var paramlist = /*[[${paramlist}]]*/ ;
-         var questionNumber = /*[[${questionNumber}]]*/ ;
-       /*]]>*/
-	</script>
+
 	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
-	<script type="text/javascript" th:src="@{/js/test.js}"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"

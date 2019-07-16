@@ -55,7 +55,7 @@ $(document).ready(function(){
 	    	}
 	    	// カウント更新
 	    	count++;
-	    	if (count > 10) {
+	    	if (count > questionNumber) {
 		    	//　カウント値が問題数を超えたら結果をCSVに書き込んで終了の文言
 	    		return true;
 	    	}
@@ -78,7 +78,7 @@ function cleanStr() {
 function writePronlem(num) {
 	var no = num+1;
 	$('#title').text("問題" +no );
-	$('#counter').text(no　+"/10問目");
+	$('#counter').text(no　+"/"+ questionNumber + "問目");
 	$('#problem').text(list[num].param);
 	//   問題は後で消す!!
 	//$('#function1').text(list[num].value);

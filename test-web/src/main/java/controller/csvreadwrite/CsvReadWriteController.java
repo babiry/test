@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dto.InputCsvParam;
 import dto.TestCsvParam;
-import form.InputForm;
+import form.SelectForm;
 import response.CsvResponse;
 import service.TestService;
 
@@ -33,19 +33,19 @@ public class CsvReadWriteController {
     private Logger LOGGER = LogManager.getLogger();
   
     @RequestMapping(value = "/csvwirte", method = {GET ,POST})
-    public List<CsvResponse> greeting(@ModelAttribute InputForm inputForm,
+    public List<CsvResponse> csvwirte(@ModelAttribute SelectForm inputForm,
              BindingResult result, 
             Model model) {
         LOGGER.info("csv write");
         
-        if (StringUtils.isNotEmpty(inputForm.getTextValue())) {
+        if (CollectionUtils.isNotEmpty(inputForm.getLevels())) {
             InputCsvParam input = 
                     new InputCsvParam(
-                            createCurrentTime(),inputForm.getTextValue(),3);
+                            createCurrentTime(),inputForm.getLevels().get(0),3);
             testService.writeCsvSample(input);
         }
         List<TestCsvParam> list = testService.readCsvSample();
-        model.addAttribute("inputText", inputForm.getTextValue());
+        model.addAttribute("inputText", inputForm.getLevels().get(0));
         model.addAttribute("paramlist", list);
 
         List<InputCsvParam> list2  = testService.readCsvTest();
