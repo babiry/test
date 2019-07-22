@@ -3,7 +3,6 @@ package controller.webview;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import constants.LevelItem;
 import constants.RadioItem;
 import dto.InputCsvParam;
-import dto.TestCsvParam;
 import form.SelectForm;
-import lombok.Getter;
-import lombok.Setter;
+import presenter.QuestionsPresenter;
 import service.TestService;
 
 @Controller
@@ -34,10 +31,6 @@ public class WebViewController {
     private TestService testService;
 
     private Logger LOGGER = LogManager.getLogger();
-
-    @Getter
-    @Setter
-    private String feature;
 
     @RequestMapping(value = "/select", method = { GET, POST })
     public String select(
@@ -49,13 +42,10 @@ public class WebViewController {
         // 特に問題種別やレベルの仕様は整理が必要
         model.addAttribute("selectForm", new SelectForm());
         model.addAttribute("name", name);
-        model.addAttribute("radioItems", Arrays.asList(
-                RadioItem.PROBLEM, RadioItem.PRACTICE));
-        model.addAttribute("numbers", 30);
+        model.addAttribute("radioItems", RadioItem.values());
+        model.addAttribute("numbers", 29);
         // 増える要素はPresenterで別メソッド定義
-        model.addAttribute("allLevels",
-                Arrays.asList(LevelItem.NUMBER,
-                        LevelItem.WORD));
+        model.addAttribute("allLevels", LevelItem.values());
         return "select";
     }
 
@@ -70,10 +60,10 @@ public class WebViewController {
         model.addAttribute("questionNumber",
                 selectForm.getQuestionNumber() == null ? 10
                         : selectForm.getQuestionNumber());
-        
+
         // Formの引数とあわせて問題を生成
-        List<TestCsvParam> list = testService.readCsvSample();
-        model.addAttribute("paramlist", list);
+        model.addAttribute("questionsPresenter", new QuestionsPresenter(
+                testService.readCsvSample(), selectForm));
 
         return "typing";
     }

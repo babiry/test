@@ -11,4 +11,17 @@ public enum RadioItem {
 
     private final String label;
     private final String value;
+    
+    public static RadioItem of(String value) {
+        for (RadioItem item : RadioItem.values()) {
+            if (item.getValue().equals(value)) {
+                return item;
+            }
+        }
+        return PROBLEM;
+    }
+    
+    public boolean isProblem() {
+        return PROBLEM == this;
+    }
 }
