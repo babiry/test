@@ -7,9 +7,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,18 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import constants.LevelItem;
 import constants.RadioItem;
+import controller.BaseController;
 import dto.InputCsvParam;
 import form.SelectForm;
 import presenter.QuestionsPresenter;
-import service.TestService;
 
 @Controller
-public class WebViewController {
-
-    @Autowired
-    private TestService testService;
-
-    private Logger LOGGER = LogManager.getLogger();
+public class WebViewController extends BaseController{
 
     @RequestMapping(value = "/select", method = { GET, POST })
     public String select(

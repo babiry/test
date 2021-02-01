@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import csv.CsvFileReadSample;
 import csv.CsvFileWriteSample;
+import dao.SentenceDao;
 import dto.InputCsvParam;
+import dto.Sentence;
 import dto.TestCsvParam;
 import util.ConvertCsvToDto;
 
@@ -24,7 +26,10 @@ public class TestServiceImpl implements TestService {
 
     @Autowired
     private CsvFileWriteSample csvFileWriteSample;
-    
+
+    @Autowired
+    private SentenceDao sentenceDao;
+
     @Autowired
     private  ConvertCsvToDto convert;
 
@@ -32,6 +37,7 @@ public class TestServiceImpl implements TestService {
     public List<TestCsvParam> readCsvSample() {
         List<String> csvData = 
                 csvFileReadSample.getTestCsv(SAMPLE_CSV_FILE_NAME);
+        List<Sentence> sentences = sentenceDao.getSentences();
         return convert.createTestCsvParams(csvData);
     }
     
