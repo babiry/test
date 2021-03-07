@@ -35,10 +35,7 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public List<TestCsvParam> readCsvSample() {
-        List<String> csvData = 
-                csvFileReadSample.getTestCsv(SAMPLE_CSV_FILE_NAME);
-        List<Sentence> sentences = sentenceDao.getSentences();
-        return convert.createTestCsvParams(csvData);
+        return convert.createTestCsvParams(sentenceDao.getSentences());
     }
     
     @Override
