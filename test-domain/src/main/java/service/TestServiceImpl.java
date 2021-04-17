@@ -34,10 +34,21 @@ public class TestServiceImpl implements TestService {
     private  ConvertCsvToDto convert;
 
     @Override
-    public List<TestCsvParam> readCsvSample() {
-        return convert.createTestCsvParams(sentenceDao.getSentences());
+    public List<Sentence> getSentence() {
+        return sentenceDao.getSentences();
+    }
+
+    @Override
+    public void insertSentence(Sentence sentence) {
+        sentenceDao.insert(sentence);
     }
     
+    @Override
+    public List<TestCsvParam> readCsvSample() {
+        List<String> csvData = 
+                csvFileReadSample.getTestCsv(SAMPLE_CSV_FILE_NAME);
+        return convert.createTestCsvParamsFromStr(csvData);
+    }
     @Override
     public List<InputCsvParam> readCsvTest() {
         List<String> csvData = 
@@ -59,4 +70,5 @@ public class TestServiceImpl implements TestService {
         });
         return csvFileWriteSample.writeCsv(writeData.toString());
     }
+
 }

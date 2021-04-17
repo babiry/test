@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,8 +19,11 @@ import constants.LevelItem;
 import constants.RadioItem;
 import controller.BaseController;
 import dto.InputCsvParam;
+import dto.Sentence;
+import form.AddWordForm;
 import form.SelectForm;
 import presenter.QuestionsPresenter;
+import presenter.WordListPresenter;
 
 @Controller
 public class WebViewController extends BaseController{
@@ -69,5 +73,18 @@ public class WebViewController extends BaseController{
 
         return "history";
     }
+    
+    @RequestMapping(value = "/word_list", method = { GET, POST })
+    public String wordList(
+            @RequestParam(name = "name", required = false, defaultValue = "World") String name,
+            Model model,@ModelAttribute AddWordForm addWordForm) {
+        
+        if (StringUtils.isNotEmpty(addWordForm.getWord()) && StringUtils.isNotEmpty(addWordForm.getAnswer()) ) {
+            testService.insertSentence(new Sentence(null, addWordForm.getWord(), addWordForm.getAnswer()));
+        }
+        
+        model.addAttribute("wordListPresenter",new WordListPresenter(testService.getSentence()));
 
+        return "word_list";
+    }
 }

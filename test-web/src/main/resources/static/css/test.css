@@ -1,4 +1,29 @@
-ul {
-  /*2px …F ”jü‚ğw’è*/
+ul li {
+    list-style: none;
+    label {
+   	margin-right: 10px;
+    width:100px;
+    float: left;
+}
+}
+
+.check_lb {
+	display:block;
+}
+.boxes {
+  /*2px ï¿½ï¿½ï¿½F ï¿½jï¿½ï¿½ï¿½ï¿½ï¿½wï¿½ï¿½*/
   border: 2px skyblue dashed; 
+}
+#word-list {
+  list-style: none;
+}
+#word-list li {
+  width: 140px;
+  text-align: center;
+  display: inline-block;
+}
+
+input[type="text"] {
+    border: 1px solid #AAA;
+    font-size: 7pt;
 }

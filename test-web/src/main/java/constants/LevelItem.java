@@ -2,6 +2,8 @@ package constants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,12 +28,13 @@ public enum LevelItem {
     }
     
     public static List<LevelItem> allOf(List<String> values) {
-        List<LevelItem> levels =new ArrayList<>();
-        for (LevelItem item : LevelItem.values()) {
-            if (item.getValue().equals("")) {
-                return null;
+        List<LevelItem> levels = new ArrayList<>();
+        List<String> items = Stream.of(LevelItem.values()).map(l -> l.getValue()).collect(Collectors.toList());
+        for (String value : values) {
+            if (items.contains(value)) {
+                levels.add(of(value));
             }
         }
-        return null;
+        return levels;
     }
 }

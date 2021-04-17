@@ -14,12 +14,16 @@ import mapper.SentenceMapper;
 public class SentenceDaoImpl implements SentenceDao {
 
     @Autowired
-    SentenceMapper sentence;
+    SentenceMapper sentenceMapper;
     
     @Override
     public List<Sentence> getSentences() {
+        return sentenceMapper.selectAll();
 
-        return sentence.selectAll();
+    }
 
+    @Override
+    public void insert(Sentence sentence) {
+        sentenceMapper.insert(sentence);
     }
 }

@@ -16,4 +16,12 @@ public interface SentenceDao {
      */
     public List<Sentence> getSentences();
 
+    /**
+     * CSVからの取得サンプルサービス
+     * 
+     * @return CSV空取得したデータ
+     */
+    public void insert(Sentence sentence);
+
+    
 }
