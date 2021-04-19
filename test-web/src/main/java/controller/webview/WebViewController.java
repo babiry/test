@@ -7,9 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,18 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import constants.LevelItem;
 import constants.RadioItem;
+import controller.BaseController;
 import dto.InputCsvParam;
+import dto.Sentence;
+import form.AddWordForm;
 import form.SelectForm;
 import presenter.QuestionsPresenter;
-import service.TestService;
+import presenter.WordListPresenter;
 
 @Controller
-public class WebViewController {
-
-    @Autowired
-    private TestService testService;
-
-    private Logger LOGGER = LogManager.getLogger();
+public class WebViewController extends BaseController{
 
     @RequestMapping(value = "/select", method = { GET, POST })
     public String select(
@@ -77,5 +73,18 @@ public class WebViewController {
 
         return "history";
     }
+    
+    @RequestMapping(value = "/word_list", method = { GET, POST })
+    public String wordList(
+            @RequestParam(name = "name", required = false, defaultValue = "World") String name,
+            Model model,@ModelAttribute AddWordForm addWordForm) {
+        
+        if (StringUtils.isNotEmpty(addWordForm.getWord()) && StringUtils.isNotEmpty(addWordForm.getAnswer()) ) {
+            testService.insertSentence(new Sentence(null, addWordForm.getWord(), addWordForm.getAnswer()));
+        }
+        
+        model.addAttribute("wordListPresenter",new WordListPresenter(testService.getSentence()));
 
+        return "word_list";
+    }
 }
