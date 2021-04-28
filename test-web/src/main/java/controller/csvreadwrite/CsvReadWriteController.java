@@ -9,28 +9,20 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import controller.BaseController;
 import dto.InputCsvParam;
 import dto.TestCsvParam;
 import form.SelectForm;
 import response.CsvResponse;
-import service.TestService;
 
 @RestController
-public class CsvReadWriteController {
-
-    @Autowired
-    private TestService testService;
-
-    private Logger LOGGER = LogManager.getLogger();
+public class CsvReadWriteController extends BaseController{
   
     @RequestMapping(value = "/csvwirte", method = {GET ,POST})
     public List<CsvResponse> csvwirte(@ModelAttribute SelectForm inputForm,

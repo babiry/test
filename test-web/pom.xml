@@ -6,7 +6,7 @@
 	<artifactId>test-web</artifactId>
 	<parent>
 		<groupId>org.springframework</groupId>
-		<artifactId>test2</artifactId>
+		<artifactId>test</artifactId>
 		<version>0.1.0</version>
 	</parent>
 	<!-- point.1 -->

@@ -37,11 +37,12 @@
 		<div id="result"></div>
 		<a href="/history">履歴を見る </a>
 		<a href="/select">選択画面に戻る </a>
+		<a href="/word_list">一覧 </a>
 	</div>
 
 	<script th:inline="javascript">
       /*<![CDATA[*/
-         var paramlist = /*[[${paramlist}]]*/ ;
+         var paramlist = /*[[${questionsPresenter.getList()}]]*/ ;
          var questionNumber = /*[[${questionNumber}]]*/ ;
        /*]]>*/
 	</script>

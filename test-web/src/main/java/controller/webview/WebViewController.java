@@ -3,14 +3,11 @@ package controller.webview;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,24 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import constants.LevelItem;
 import constants.RadioItem;
+import controller.BaseController;
 import dto.InputCsvParam;
-import dto.TestCsvParam;
+import dto.Sentence;
+import form.AddWordForm;
 import form.SelectForm;
-import lombok.Getter;
-import lombok.Setter;
-import service.TestService;
+import presenter.QuestionsPresenter;
+import presenter.WordListPresenter;
 
 @Controller
-public class WebViewController {
-
-    @Autowired
-    private TestService testService;
-
-    private Logger LOGGER = LogManager.getLogger();
-
-    @Getter
-    @Setter
-    private String feature;
+public class WebViewController extends BaseController{
 
     @RequestMapping(value = "/select", method = { GET, POST })
     public String select(
@@ -49,13 +38,10 @@ public class WebViewController {
         // 特に問題種別やレベルの仕様は整理が必要
         model.addAttribute("selectForm", new SelectForm());
         model.addAttribute("name", name);
-        model.addAttribute("radioItems", Arrays.asList(
-                RadioItem.PROBLEM, RadioItem.PRACTICE));
-        model.addAttribute("numbers", 30);
+        model.addAttribute("radioItems", RadioItem.values());
+        model.addAttribute("numbers", 29);
         // 増える要素はPresenterで別メソッド定義
-        model.addAttribute("allLevels",
-                Arrays.asList(LevelItem.NUMBER,
-                        LevelItem.WORD));
+        model.addAttribute("allLevels", LevelItem.values());
         return "select";
     }
 
@@ -70,10 +56,10 @@ public class WebViewController {
         model.addAttribute("questionNumber",
                 selectForm.getQuestionNumber() == null ? 10
                         : selectForm.getQuestionNumber());
-        
+
         // Formの引数とあわせて問題を生成
-        List<TestCsvParam> list = testService.readCsvSample();
-        model.addAttribute("paramlist", list);
+        model.addAttribute("questionsPresenter", new QuestionsPresenter(
+                testService.readCsvSample(), selectForm));
 
         return "typing";
     }
@@ -87,5 +73,18 @@ public class WebViewController {
 
         return "history";
     }
+    
+    @RequestMapping(value = "/word_list", method = { GET, POST })
+    public String wordList(
+            @RequestParam(name = "name", required = false, defaultValue = "World") String name,
+            Model model,@ModelAttribute AddWordForm addWordForm) {
+        
+        if (StringUtils.isNotEmpty(addWordForm.getWord()) && StringUtils.isNotEmpty(addWordForm.getAnswer()) ) {
+            testService.insertSentence(new Sentence(null, addWordForm.getWord(), addWordForm.getAnswer()));
+        }
+        
+        model.addAttribute("wordListPresenter",new WordListPresenter(testService.getSentence()));
 
+        return "word_list";
+    }
 }

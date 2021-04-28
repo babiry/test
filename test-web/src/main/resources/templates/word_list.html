@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link th:href="@{/css/test.css}" rel="stylesheet"></link>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body class="bg-light">
+	<div class="container">
+		<div class="row">
+			<div class="col text-left" id="testTime"></div>
+			<div class="col text-right" th:text="'Hello, ' + ${name} + '!'"></div>
+		</div>
+
+		<p>Wordの追加・編集</p>
+		<p>新規追加</p>
+		<form class="form-inline justify-content-center" th:action="@{/word_list}" th:object="${addWordForm}" method="post">
+			<ul>
+				<li><label class="check_lb">word： 
+					<input type="text" name="textValue" id="textValue" th:field="*{word}" size="80" />
+				</label></li>
+				<li><label class="check_lb">answer： 
+					<input type="text" name="textParam" id="textParam" th:field="*{answer}" size="80" />
+				</label></li>
+				<li><input  type="submit" value="追加" /></li>
+			</ul>
+		</form>
+
+		<p>編集</p>
+
+		<ul th:each="para : ${wordListPresenter.list}" id="word-list">
+			<li th:text="${para.id}"></li>
+			<li th:text="${para.word}"></li>
+			<li th:text="${para.answer}"></li>
+		</ul>
+	</div>
+
+	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/test.js}"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+		crossorigin="anonymous"></script>
+</body>
+</html>

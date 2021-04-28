@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test_schema
+    username: test
+    password: test
+    driverClassName: com.mysql.jdbc.Driver
+
+mybatis:
+  # mapper-locations: classpath*:/mapper/*.xml
+#  type-aliases-package: mapper
+#  type-handlers-package: mapper.**.typehandler
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 10
+    default-statement-timeout: 30

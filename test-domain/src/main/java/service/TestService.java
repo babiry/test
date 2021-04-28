@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import dto.InputCsvParam;
+import dto.Sentence;
 import dto.TestCsvParam;
 
 /**
@@ -11,9 +12,22 @@ import dto.TestCsvParam;
 public interface TestService {
 
     /**
+     * DBからのデータ取得
+     * 
+     * @return 取得したデータ
+     */
+    public List<Sentence> getSentence();
+ 
+    /**
+     * DBへのデータ登録
+     * 
+     */
+    public void insertSentence(Sentence sentence);
+    
+    /**
      * CSVからの取得サンプルサービス
      * 
-     * @return CSV空取得したデータ
+     * @return CSVから取得したデータ
      */
     public List<TestCsvParam> readCsvSample();
 

@@ -36,7 +36,7 @@
 			</div>
 			<div>
 				<label class="control-label">問題範囲</label>
-				<ul>
+				<ul class="boxes">
 					<li th:each="level : ${allLevels}"><input type="checkbox"
 						th:field="*{levels}" th:value="${level.value}" /> <label
 						th:for="${#ids.prev('levels')}" th:text="${level.label}"></label></li>
@@ -44,6 +44,8 @@
 			</div>
 			<input type="submit" value="問題開始" class="btn btn-default" />
 		</form>
+		<a href="/history">履歴を見る </a>
+		<a href="/word_list">一覧 </a>
 	</div>
 
 
