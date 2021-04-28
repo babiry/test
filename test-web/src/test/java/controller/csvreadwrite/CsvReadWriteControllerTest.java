@@ -8,7 +8,7 @@ public class CsvReadWriteControllerTest {
 
     @Test
     public void test() {
-        fail("まだ実装されていません");
+        fail("まだ実装されていませんですってよ!!");
     }
 
 }
