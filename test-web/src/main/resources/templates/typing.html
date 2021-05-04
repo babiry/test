@@ -26,7 +26,7 @@
 		<form class="form-inline justify-content-center">
 			<input type="text" name="textValue" id="textValue" size="80" />
 		</form>
-		<form role="form" th:action="@{/typing}" th:object="${inputFormTest}"
+		<form role="form" th:action="@{/typing}" th:object="${inputForm}"
 			method="post">
 			<div class="col text-center">
 				<button type="button" class="btn btn-default">画面更新</button>
@@ -47,6 +47,7 @@
        /*]]>*/
 	</script>
 	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/common.js}"></script>
 	<script type="text/javascript" th:src="@{/js/test.js}"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"

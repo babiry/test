@@ -78,12 +78,12 @@ public class WebViewController extends BaseController{
     public String wordList(
             @RequestParam(name = "name", required = false, defaultValue = "World") String name,
             Model model,@ModelAttribute AddWordForm addWordForm) {
-        
+        LOGGER.info("wordList start");
         if (StringUtils.isNotEmpty(addWordForm.getWord()) && StringUtils.isNotEmpty(addWordForm.getAnswer()) ) {
             testService.insertSentence(new Sentence(null, addWordForm.getWord(), addWordForm.getAnswer()));
         }
         
-        model.addAttribute("wordListPresenter",new WordListPresenter(testService.getSentence()));
+        model.addAttribute("wordListPresenter",new WordListPresenter(testService.getSentences()));
 
         return "word_list";
     }

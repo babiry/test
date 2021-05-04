@@ -5,23 +5,29 @@ import java.util.List;
 import dto.Sentence;
 
 /**
- * Test用サービス
+ * 文章Dao
  */
 public interface SentenceDao {
 
     /**
-     * CSVからの取得サンプルサービス
-     * 
-     * @return CSV空取得したデータ
+     * 対象のデータ取得
+     */
+    public Sentence getSentence(String id);
+    
+    /**
+     * 一覧取得
      */
     public List<Sentence> getSentences();
 
     /**
-     * CSVからの取得サンプルサービス
-     * 
-     * @return CSV空取得したデータ
+     * 登録
      */
     public void insert(Sentence sentence);
-
     
+    /**
+     * 更新
+     * 
+     * @return 更新結果
+     */
+    public boolean update(Sentence sentence);
 }

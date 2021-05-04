@@ -31,16 +31,18 @@
 		</form>
 
 		<p>編集</p>
-
-		<ul th:each="para : ${wordListPresenter.list}" id="word-list">
-			<li th:text="${para.id}"></li>
-			<li th:text="${para.word}"></li>
-			<li th:text="${para.answer}"></li>
-		</ul>
+        <p class="update-result"></p>
+		<form th:each="para : ${wordListPresenter.list}" id="sentenceForm">
+			<input type="button"  class="submit" id="_submit" value="更新"/>
+			<input type="hidden" id="_id" th:value="*{para.id}" />
+			<input type="text" id="_word" th:value="${para.word}" size="40" />
+			<input type="text" id="_answer" th:value="${para.answer}" size="40" />
+		</form>
 	</div>
 
 	<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
-	<script type="text/javascript" th:src="@{/js/test.js}"></script>
+	<script type="text/javascript" th:src="@{/js/common.js}"></script>
+	<script type="text/javascript" th:src="@{/js/wordListProcess.js}"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"

@@ -3,6 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.SentenceMapper">
+    <select id="select" resultType="dto.Sentence">
+        select * from sentence where id = #{id};
+    </select>
     <select id="selectAll" resultType="dto.Sentence">
         select * from sentence
     </select>
@@ -14,5 +17,13 @@
             #{answer},
             #{word}
         )
-  </insert>
+    </insert>
+    <update id="update" parameterType="dto.Sentence">
+        update sentence
+        set
+            answer = #{answer},
+            word = #{word}
+        where
+            id = #{id};
+    </update>
 </mapper>

@@ -9,7 +9,11 @@ import dto.Sentence;
 @Mapper
 public interface SentenceMapper {
 
-        List<Sentence> selectAll();
-       
-       void insert(Sentence sentence);
+      Sentence select(String id);
+
+      List<Sentence> selectAll();
+
+      void insert(Sentence sentence);
+      
+      boolean update(Sentence sentence);
 }
