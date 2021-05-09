@@ -17,13 +17,22 @@ public class SentenceDaoImpl implements SentenceDao {
     SentenceMapper sentenceMapper;
     
     @Override
+    public Sentence getSentence(String id) {
+        return sentenceMapper.select(id);
+    }
+
+    @Override
     public List<Sentence> getSentences() {
         return sentenceMapper.selectAll();
-
     }
 
     @Override
     public void insert(Sentence sentence) {
         sentenceMapper.insert(sentence);
+    }
+    
+    @Override
+    public boolean update(Sentence sentence) {
+        return sentenceMapper.update(sentence);
     }
 }

@@ -12,17 +12,30 @@ import dto.TestCsvParam;
 public interface TestService {
 
     /**
-     * DBからのデータ取得
+     * DBから対象のSentenc取得
      * 
      * @return 取得したデータ
      */
-    public List<Sentence> getSentence();
+    public Sentence getSentence(String id);
+ 
+    /**
+     * DBからのSentence一覧取得
+     * 
+     * @return 取得したデータ
+     */
+    public List<Sentence> getSentences();
  
     /**
      * DBへのデータ登録
      * 
      */
     public void insertSentence(Sentence sentence);
+    
+    /**
+     * DBへのデータ更新
+     * 
+     */
+    public boolean updateSentence(Sentence sentence);
     
     /**
      * CSVからの取得サンプルサービス

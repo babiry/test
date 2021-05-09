@@ -34,13 +34,23 @@ public class TestServiceImpl implements TestService {
     private  ConvertCsvToDto convert;
 
     @Override
-    public List<Sentence> getSentence() {
+    public Sentence getSentence(String id) {
+        return sentenceDao.getSentence(id);
+    }
+
+    @Override
+    public List<Sentence> getSentences() {
         return sentenceDao.getSentences();
     }
 
     @Override
     public void insertSentence(Sentence sentence) {
         sentenceDao.insert(sentence);
+    }
+
+    @Override
+    public boolean updateSentence(Sentence sentence) {
+        return sentenceDao.update(sentence);
     }
     
     @Override
